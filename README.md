@@ -1,172 +1,102 @@
-В репозиторий добавлен файл исключений для проектов Terraform <br/>
-Который находится в terraform/.gitignore <br/>
-В нем исключаются: <br/>
-+ Скрытая папка .terraform и все что в ней находится <br/>
-+ Служебные файлы tfstate состояния <br/>
-+ Файлы crash логов <br/>
-+ Файлы переменных содержащие пароли, ключи и т.д. tfvars <br/>
-+ Файлы временно содержащие локальные переопределения override.tf а так же файлы конфигурации .terraform.rc и terraform.rc
+# Домашнее задание к занятию "Работа в терминале. Лекция 1"
 
-## ДЗ для Ветвления в Git
-**Промежуточный этап**
-```
-~/Netology.ru/devops-netology on  main ⌚ 17:34:25
-$ git log --oneline --graph --all
-* f15ad0d (origin/git-rebase, git-rebase) git-rebase 2
-* a53b973 git-rebase 1
-| * 9bc3f8c (HEAD -> main, origin/main, origin/HEAD) Change rebase.sh in main
-|/  
-| * ef6af1a (origin/git-merge, git-merge) merge: use shift
-| * c6a9674 merge: @ instead *
-|/  
-* ebfefc1 prepare for merge and rebase
-* 2ec95a1 (tag: v0.1, tag: v0.0) git rm file
-* 2147374 Edit README.md for MD standart
-* c49fd04 Moved and deleted
-* 6de53fb Prepare to delete and move
-* 8fabc17 Added gitignore
-* da218e1 First commit
-* c92ae73 Initial commit
-```
-**Merge**
-```
-~/Netology.ru/devops-netology on  main ⌚ 17:34:33
-$ git merge git-merge
-Merge made by the 'recursive' strategy.
- branching/merge.sh | 5 +++--
- 1 file changed, 3 insertions(+), 2 deletions(-)
+### Цель задания
 
- ~/Netology.ru/devops-netology on  main ⌚ 17:39:19
-$ git push
-Enumerating objects: 7, done.
-Counting objects: 100% (7/7), done.
-Delta compression using up to 4 threads
-Compressing objects: 100% (3/3), done.
-Writing objects: 100% (3/3), 368 bytes | 368.00 KiB/s, done.
-Total 3 (delta 1), reused 0 (delta 0), pack-reused 0
-remote: Resolving deltas: 100% (1/1), completed with 1 local object.
-To https://github.com/Alexey-Tatakin/devops-netology.git
-   9bc3f8c..310debe  main -> main
-```
-**Результат**
-```
-~/Netology.ru/devops-netology on  main ⌚ 17:40:10
-$ git log --oneline --graph --all
-*   310debe (HEAD -> main, origin/main, origin/HEAD) Merge branch 'git-merge'
-|\  
-| * ef6af1a (origin/git-merge, git-merge) merge: use shift
-| * c6a9674 merge: @ instead *
-* | 9bc3f8c Change rebase.sh in main
-|/  
-| * f15ad0d (origin/git-rebase, git-rebase) git-rebase 2
-| * a53b973 git-rebase 1
-|/  
-* ebfefc1 prepare for merge and rebase
-* 2ec95a1 (tag: v0.1, tag: v0.0) git rm file
-* 2147374 Edit README.md for MD standart
-* c49fd04 Moved and deleted
-* 6de53fb Prepare to delete and move
-* 8fabc17 Added gitignore
-* da218e1 First commit
-* c92ae73 Initial commit
-```
-**Rebase**
-```
-~/Netology.ru/devops-netology on  git-rebase ⌚ 17:44:35
-$ git rebase -i main
-Auto-merging branching/rebase.sh
-CONFLICT (content): Merge conflict in branching/rebase.sh
-error: could not apply a53b973... git-rebase 1
-Resolve all conflicts manually, mark them as resolved with
-"git add/rm <conflicted_files>", then run "git rebase --continue".
-You can instead skip this commit: run "git rebase --skip".
-To abort and get back to the state before "git rebase", run "git rebase --abort".
-Could not apply a53b973... git-rebase 1
+В результате выполнения этого задания вы:
+1. Научитесь работать с базовым функционалом инструмента VirtualBox, который помогает с быстрой разверткой виртуальных машин.
+2. Научитесь работать с документацией в формате man, чтобы ориентироваться в этом полезном и мощном инструменте документации.
+3. Ознакомитесь с функциями Bash (PATH, HISTORY, batch/at), которые помогут комфортно работать с оболочкой командной строки (шеллом) и понять некоторые его ограничения.
 
-~/Netology.ru/devops-netology/branching on  310debe! ⌚ 17:50:29
-$ git rebase --continue
-[detached HEAD 54cea2f] git-rebase 1
- 1 file changed, 1 insertion(+), 1 deletion(-)
-Auto-merging branching/rebase.sh
-CONFLICT (content): Merge conflict in branching/rebase.sh
-error: could not apply f15ad0d... git-rebase 2
-Resolve all conflicts manually, mark them as resolved with
-"git add/rm <conflicted_files>", then run "git rebase --continue".
-You can instead skip this commit: run "git rebase --skip".
-To abort and get back to the state before "git rebase", run "git rebase --abort".
-Could not apply f15ad0d... git-rebase 2
 
-~/Netology.ru/devops-netology/branching on  54cea2f! ⌚ 17:52:50
-$ git rebase --continue
-[detached HEAD 2b83eb5] git-rebase 1
- Date: Fri Feb 3 17:28:11 2023 +0300
- 1 file changed, 2 insertions(+), 2 deletions(-)
-Successfully rebased and updated refs/heads/git-rebase.
-```
-**Push - error**
-```
-~/Netology.ru/devops-netology/branching on  git-rebase ⌚ 17:53:17
-$ git push -u origin git-rebase
-To https://github.com/Alexey-Tatakin/devops-netology.git
- ! [rejected]        git-rebase -> git-rebase (non-fast-forward)
-error: failed to push some refs to 'https://github.com/Alexey-Tatakin/devops-netology.git'
-hint: Updates were rejected because the tip of your current branch is behind
-hint: its remote counterpart. Integrate the remote changes (e.g.
-hint: 'git pull ...') before pushing again.
-hint: See the 'Note about fast-forwards' in 'git push --help' for details.
+### Инструкция к заданию
 
-~/Netology.ru/devops-netology/branching on  git-rebase ⌚ 17:55:36
-$ git push -u origin git-rebase -f
-Enumerating objects: 7, done.
-Counting objects: 100% (7/7), done.
-Delta compression using up to 4 threads
-Compressing objects: 100% (4/4), done.
-Writing objects: 100% (4/4), 389 bytes | 389.00 KiB/s, done.
-Total 4 (delta 2), reused 0 (delta 0), pack-reused 0
-remote: Resolving deltas: 100% (2/2), completed with 2 local objects.
-To https://github.com/Alexey-Tatakin/devops-netology.git
- + f15ad0d...2b83eb5 git-rebase -> git-rebase (forced update)
-Branch 'git-rebase' set up to track remote branch 'git-rebase' from 'origin'.
+1. Установите средство виртуализации [Oracle VirtualBox](https://www.virtualbox.org/).
 ```
-**Final merge git-rebase**
+$ VBoxManage -version
+7.0.6r155176
 ```
-~/Netology.ru/devops-netology/branching on  main ⌚ 17:59:05
-$ git merge git-rebase
-Updating 310debe..2b83eb5
-Fast-forward
- branching/rebase.sh | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
 
-~/Netology.ru/devops-netology/branching on  main ⌚ 17:59:56
-$ git push
-Total 0 (delta 0), reused 0 (delta 0), pack-reused 0
-To https://github.com/Alexey-Tatakin/devops-netology.git
-   310debe..2b83eb5  main -> main
+2. Установите средство автоматизации [Hashicorp Vagrant](https://hashicorp-releases.yandexcloud.net/vagrant/).
 ```
-**Status and log**
+$ vagrant -v
+Vagrant 2.2.18
 ```
-~/Netology.ru/devops-netology/branching on  main ⌚ 18:00:16
-$ git status
-On branch main
-Your branch is up to date with 'origin/main'.
 
-nothing to commit, working tree clean
+3. В вашем основном окружении подготовьте удобный для дальнейшей работы терминал. Можно предложить:
 
-~/Netology.ru/devops-netology/branching on  main ⌚ 18:02:32
-$ git log --oneline --graph --all
-* 2b83eb5 (HEAD -> main, origin/main, origin/git-rebase, origin/HEAD, git-rebase) git-rebase 1
-*   310debe Merge branch 'git-merge'
-|\  
-| * ef6af1a (origin/git-merge, git-merge) merge: use shift
-| * c6a9674 merge: @ instead *
-* | 9bc3f8c Change rebase.sh in main
-|/  
-* ebfefc1 prepare for merge and rebase
-* 2ec95a1 (tag: v0.1, tag: v0.0) git rm file
-* 2147374 Edit README.md for MD standart
-* c49fd04 Moved and deleted
-* 6de53fb Prepare to delete and move
-* 8fabc17 Added gitignore
-* da218e1 First commit
-* c92ae73 Initial commit
-```
+	* ~~iTerm2 в Mac OS X~~
+	* Терминал в MacOS
+	* ~~Windows Terminal в Windows~~
+	* выбрать цветовую схему, размер окна, шрифтов и т.д.
+	* почитать о кастомизации PS1/применить при желании.
+  
+![Окно терминала в MacOS + настроенный zsh](https://github.com/Alexey-Tatakin/devops-netology/blob/base-admin-term-lec-1/screen1.png "zsh in MacOS")
+	
+
+
+### Инструменты/ дополнительные материалы, которые пригодятся для выполнения задания
+
+1. [Конфигурация VirtualBox через Vagrant](https://www.vagrantup.com/docs/providers/virtualbox/configuration.html)
+2. [Использование условий в Bash](https://www.gnu.org/software/bash/manual/html_node/Bash-Conditional-Expressions.html)
+
+------
+
+## Задание
+
+1. С помощью базового файла конфигурации запустите Ubuntu 20.04 в VirtualBox посредством Vagrant:
+
+	* Создайте директорию, в которой будут храниться конфигурационные файлы Vagrant. В ней выполните `vagrant init`. Замените содержимое Vagrantfile по умолчанию следующим:
+
+		```bash
+		Vagrant.configure("2") do |config|
+			config.vm.box = "bento/ubuntu-20.04"
+		end
+		```
+
+	* Выполнение в этой директории `vagrant up` установит провайдер VirtualBox для Vagrant, скачает необходимый образ и запустит виртуальную машину.
+
+	* `vagrant suspend` выключит виртуальную машину с сохранением ее состояния (т.е., при следующем `vagrant up` будут запущены все процессы внутри, которые работали на момент вызова suspend), `vagrant halt` выключит виртуальную машину штатным образом.
+
+1. Ознакомьтесь с графическим интерфейсом VirtualBox, посмотрите как выглядит виртуальная машина, которую создал для вас Vagrant, какие аппаратные ресурсы ей выделены. Какие ресурсы выделены по-умолчанию?
+
+1. Ознакомьтесь с возможностями конфигурации VirtualBox через Vagrantfile: [документация](https://www.vagrantup.com/docs/providers/virtualbox/configuration.html). Как добавить оперативной памяти или ресурсов процессора виртуальной машине?
+
+1. Команда `vagrant ssh` из директории, в которой содержится Vagrantfile, позволит вам оказаться внутри виртуальной машины без каких-либо дополнительных настроек. Попрактикуйтесь в выполнении обсуждаемых команд в терминале Ubuntu.
+
+1. Ознакомьтесь с разделами `man bash`, почитайте о настройках самого bash:
+    * какой переменной можно задать длину журнала `history`, и на какой строчке manual это описывается?
+    * что делает директива `ignoreboth` в bash?
+1. В каких сценариях использования применимы скобки `{}` и на какой строчке `man bash` это описано?
+1. С учётом ответа на предыдущий вопрос, как создать однократным вызовом `touch` 100000 файлов? Получится ли аналогичным образом создать 300000? Если нет, то почему?
+1. В man bash поищите по `/\[\[`. Что делает конструкция `[[ -d /tmp ]]`
+1. Сделайте так, чтобы в выводе команды `type -a bash` первым стояла запись с нестандартным путем, например bash is ... 
+Используйте знания о просмотре существующих и создании новых переменных окружения, обратите внимание на переменную окружения PATH 
+
+	```bash
+	bash is /tmp/new_path_directory/bash
+	bash is /usr/local/bin/bash
+	bash is /bin/bash
+	```
+
+	(прочие строки могут отличаться содержимым и порядком)
+    В качестве ответа приведите команды, которые позволили вам добиться указанного вывода или соответствующие скриншоты.
+
+1. Чем отличается планирование команд с помощью `batch` и `at`?
+
+1. Завершите работу виртуальной машины чтобы не расходовать ресурсы компьютера и/или батарею ноутбука.
+
+*В качестве решения дайте ответы на вопросы свободной форме* 
+
+---
+
+### Правила приема домашнего задания
+
+- В личном кабинете отправлена ссылка на .md файл в вашем репозитории.
+
+### Критерии оценки
+
+Зачет - выполнены все задания, ответы даны в развернутой форме, приложены соответствующие скриншоты и файлы проекта, в выполненных заданиях нет противоречий и нарушения логики.
+
+На доработку - задание выполнено частично или не выполнено, в логике выполнения заданий есть противоречия, существенные недостатки. 
+
+[https://github.com/Alexey-Tatakin/devops-netology/blob/base-admin-term-lec-1/screen1.png]: https://github.com/Alexey-Tatakin/devops-netology/blob/base-admin-term-lec-1/screen1.png "zsh in MacOS"
